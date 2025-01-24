@@ -36,7 +36,7 @@ export default function Skills() {
       </div>
 
       <div className="relative max-w-7xl mx-auto w-full">
-        <h2 className="myskills text-4xl md:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d17777] via-[#ff98a2] to-[#d17777] animate-gradient-x bg-[200%_auto] font-quicksand mb-16 text-center opacity-0 transform translate-y-10">
+        <h2 className="myskills text-3xl md:text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d17777] via-[#ff98a2] to-[#d17777] animate-gradient-x bg-[200%_auto] font-quicksand mb-16 text-center opacity-0 transform translate-y-10">
           MY SKILLS
         </h2>
 
@@ -59,7 +59,7 @@ export default function Skills() {
                 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000 ease-in-out" />
               
               <div className="flex flex-col items-center relative z-10">
-                <span className="text-white text-lg md:text-xl lg:text-2xl font-semibold text-center whitespace-nowrap
+                <span className="text-white text-lg md:text-xl lg:text-1xl font-semibold text-center whitespace-nowrap
                   group-hover:text-[#ff98a2] transition-all duration-300
                   group-hover:drop-shadow-[0_0_8px_rgba(255,152,162,0.5)]">
                   {skill}

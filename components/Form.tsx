@@ -84,7 +84,7 @@ export default function ContactForm() {
 
       <div className="container px-4 md:px-6 relative z-10">
         <div className="text-center mb-12 space-y-4">
-          <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-rose-500 to-pink-500">
+          <h2 className="text-3xl md:text-3xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-rose-500 to-pink-500">
             Let's Connect
           </h2>
           <p className="text-zinc-400 max-w-2xl mx-auto">

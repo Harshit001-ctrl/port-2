@@ -34,9 +34,9 @@ export default function About() {
         </div>
 
         <div className="space-y-8 backdrop-blur-sm bg-black/30 p-6 md:p-8 rounded-3xl">
-          <h1 className="text-4xl md:text-5xl font-bold text-[#d17777] font-quicksand">ABOUT ME</h1>
+          <h1 className="text-3xl md:text-3xl font-semibold text-[#d17777] font-quicksand">ABOUT ME</h1>
 
-          <div className="text-white text-lg leading-relaxed space-y-4">
+          <div className="text-white text-base leading-relaxed space-y-4">
             <p>
               Recent graduate with a passion for Full Stack Development, eager to contribute skills in modern
               technologies to innovative projects. Strong problem-solving abilities and a collaboration mindset to learn

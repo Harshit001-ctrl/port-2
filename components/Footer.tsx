@@ -13,8 +13,8 @@ export default function Footer() {
 
   return (
     <footer className="py-16 sm:py-20 px-4 md:px-8 lg:px-16 bg-gradient-to-b from-[#111] to-[#1a1a1a] min-h-[40vh] border-t border-[#333]">
-      <div className="max-w-6xl mx-auto flex flex-col items-center">
-        <h2 className="name-footer font-quicksand text-4xl sm:text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-[#d17777] to-[#ff98a2] text-center opacity-0 transform translate-y-10 font-bold">
+      <div className="max-w-4xl mx-auto flex flex-col items-center">
+        <h2 className="name-footer font-quicksand text-4xl sm:text-4xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-[#d17777] to-[#ff98a2] text-center opacity-0 transform translate-y-10 font-semibold">
           Harshit Rao
         </h2>
 
