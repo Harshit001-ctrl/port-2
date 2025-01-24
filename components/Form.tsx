@@ -110,7 +110,7 @@ export default function ContactForm() {
                           <Input
                             placeholder="Your Name"
                             {...field}
-                            className="bg-zinc-900/50 border-zinc-800 focus:border-rose-500 focus:ring-rose-500/20"
+                            className="bg-zinc-900/50 border-zinc-800 text-white focus:border-rose-500 focus:ring-rose-500/20"
                           />
                         </FormControl>
                         <FormMessage />
@@ -131,7 +131,7 @@ export default function ContactForm() {
                           <Input
                             placeholder="your gmail@example.com"
                             {...field}
-                            className="bg-zinc-900/50 border-zinc-800 focus:border-rose-500 focus:ring-rose-500/20"
+                            className="bg-zinc-900/50 text-white border-zinc-800 focus:border-rose-500 focus:ring-rose-500/20"
                           />
                         </FormControl>
                         <FormMessage />
