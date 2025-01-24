@@ -1,8 +1,11 @@
 import type { Metadata } from 'next'
 import { Quicksand } from 'next/font/google'
 import './globals.css'
+import emailjs from '@emailjs/browser'
 
 const quicksand = Quicksand({ subsets: ['latin'] })
+
+emailjs.init("yYbdABY9A_DW7QLyj")
 
 export const metadata: Metadata = {
   title: 'Harshit Rao - Full Stack Developer',

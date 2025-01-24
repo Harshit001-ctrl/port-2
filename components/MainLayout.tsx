@@ -7,11 +7,17 @@ import About from "./About"
 import Experience from "./Experience"
 import Footer from "./Footer"
 import Form from "./Form"
-import SplineBackground from "./SplineBackground"
+import dynamic from 'next/dynamic'
 import Hero from "./Hero"
 import Skills from "./Skills"
 import "../app/globals.css"
 // import { Form } from 'react-hook-form'
+
+// Import SplineBackground with no SSR
+const SplineBackground = dynamic(() => import('./SplineBackground'), {
+  ssr: false
+});
+
 export function MainLayout() {
   const [isVisible, setIsVisible] = useState(false)
 
@@ -36,7 +42,7 @@ export function MainLayout() {
   }, [])
 
   return (
-    <div className={`transition-opacity duration-500 ${isVisible ? "opacity-100" : "opacity-0"}`}>
+    <div className={`transition-opacity duration-500 `}>
       <ScrollProgressBar />
       <SplineBackground />
       <Hero />
@@ -50,4 +56,5 @@ export function MainLayout() {
     </div>
   )
 }
+
 

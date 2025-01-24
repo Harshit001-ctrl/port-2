@@ -1,29 +1,30 @@
-"use client"
+"use client";
 
-import { useState, useRef, useEffect } from "react"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
-import { Mail, User, MessageSquare, Send } from "lucide-react"
-import { toast } from "react-hot-toast"
-import gsap from "gsap"
+import { useState, useRef, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { Mail, User, MessageSquare, ArrowRight } from "lucide-react";
+import { toast } from "react-hot-toast";
+import gsap from "gsap";
+import emailjs from "@emailjs/browser";
+import { Toaster } from 'react-hot-toast';
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import emailjs from "@emailjs/browser"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Card, CardContent } from "@/components/ui/card";
 
 const formSchema = z.object({
   from_name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   from_email: z.string().email({ message: "Please enter a valid email address." }),
   from_message: z.string().min(10, { message: "Message must be at least 10 characters." }),
-})
+});
 
 export default function ContactForm() {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const formRef = useRef<HTMLFormElement>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const formRef = useRef<HTMLFormElement | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -32,142 +33,157 @@ export default function ContactForm() {
       from_email: "",
       from_message: "",
     },
-  })
+  });
 
   useEffect(() => {
-    gsap.from(formRef.current, {
-      opacity: 0,
-      y: 50,
-      duration: 1,
-      ease: "power3.out",
-    })
-  }, [])
+  if (formRef.current) {
+    gsap.fromTo(
+      formRef.current,
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
+    );
+  }
+}, []);
+
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsSubmitting(true)
+    setIsSubmitting(true);
+
+    if (!formRef.current) {
+      toast.error("Form not found. Please try again.");
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
-      await emailjs.sendForm("service_tw89tjw", "template_1dz22lk", formRef.current!, "yYbdABY9A_DW7QLyj")
-
-      gsap.to([".form-field"], {
-        y: -10,
-        opacity: 0,
-        stagger: 0.1,
-        duration: 0.5,
-        ease: "power2.in",
-        onComplete: () => {
-          form.reset()
-          gsap.to([".form-field"], {
-            y: 0,
-            opacity: 1,
-            stagger: 0.1,
-            duration: 0.5,
-            ease: "power2.out",
-          })
+      await emailjs.send(
+        "service_tw89tjw",
+        "template_1dz22lk",
+        {
+          from_name: values.from_name,
+          from_email: values.from_email,
+          message: values.from_message,
         },
-      })
+        "yYbdABY9A_DW7QLyj"
+      );
 
-      toast.success("Message sent successfully!")
+      toast.success("Message sent successfully!");
+      form.reset();
     } catch (error) {
-      console.error("EmailJS Error:", error)
-      toast.error("Failed to send message. Please try again later.")
+      console.error("EmailJS Error:", error);
+      toast.error("Failed to send message. Please try again.");
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
   }
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-black/80">
-      <Card className="max-w-2xl mx-auto bg-zinc-900 shadow-2xl shadow-zinc-800/20 border-zinc-800">
-        <CardHeader>
-          <CardTitle className="text-3xl font-bold text-white text-center">Get in Touch</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-zinc-400 text-center mb-8">Have a question or proposal? I'd love to hear from you.</p>
-          <Form {...form}>
-            <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <FormField
-                control={form.control}
-                name="from_name"
-                render={({ field }) => (
-                  <FormItem className="form-field">
-                    <FormLabel className="flex items-center gap-2 text-zinc-300">
-                      <User className="h-4 w-4" />
-                      Name
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Your Name"
-                        {...field}
-                        className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-zinc-600 focus:ring-zinc-600"
-                      />
-                    </FormControl>
-                    <FormMessage className="text-red-400" />
-                  </FormItem>
-                )}
-              />
+    <section className="relative min-h-screen flex items-center justify-center py-20">
+      <Toaster position="bottom-right" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-900 via-black to-black" />
 
-              <FormField
-                control={form.control}
-                name="from_email"
-                render={({ field }) => (
-                  <FormItem className="form-field">
-                    <FormLabel className="flex items-center gap-2 text-zinc-300">
-                      <Mail className="h-4 w-4" />
-                      Email
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="yourgmail@example.com"
-                        type="email"
-                        {...field}
-                        className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-zinc-600 focus:ring-zinc-600"
-                      />
-                    </FormControl>
-                    <FormMessage className="text-red-400" />
-                  </FormItem>
-                )}
-              />
+      <div className="container px-4 md:px-6 relative z-10">
+        <div className="text-center mb-12 space-y-4">
+          <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-rose-500 to-pink-500">
+            Let's Connect
+          </h2>
+          <p className="text-zinc-400 max-w-2xl mx-auto">
+            Have an exciting project in mind? I'd love to hear about it. Drop me a message, and let's create something amazing together.
+          </p>
+        </div>
 
-              <FormField
-                control={form.control}
-                name="from_message"
-                render={({ field }) => (
-                  <FormItem className="form-field">
-                    <FormLabel className="flex items-center gap-2 text-zinc-300">
-                      <MessageSquare className="h-4 w-4" />
-                      Message
-                    </FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Your message here..."
-                        className="min-h-[120px] resize-none bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-zinc-600 focus:ring-zinc-600"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage className="text-red-400" />
-                  </FormItem>
-                )}
-              />
+        <Card className="max-w-2xl mx-auto bg-black/40 backdrop-blur-xl border-zinc-800/50 shadow-xl">
+          <CardContent className="p-6">
+            <Form {...form}>
+              <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <div className="grid gap-6 md:grid-cols-2">
+                  <FormField
+                    control={form.control}
+                    name="from_name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-zinc-200 flex items-center gap-2">
+                          <User className="h-4 w-4 text-rose-500" />
+                          Name
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Your Name"
+                            {...field}
+                            className="bg-zinc-900/50 border-zinc-800 focus:border-rose-500 focus:ring-rose-500/20"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-              <Button type="submit" className="w-full bg-white text-black hover:bg-zinc-200" disabled={isSubmitting}>
-                {isSubmitting ? (
-                  <div className="flex items-center gap-2">
-                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-black border-t-transparent"></div>
-                    Sending...
-                  </div>
-                ) : (
-                  <div className="flex items-center gap-2">
-                    <Send className="h-4 w-4" />
-                    Send Message
-                  </div>
-                )}
-              </Button>
-            </form>
-          </Form>
-        </CardContent>
-      </Card>
+                  <FormField
+                    control={form.control}
+                    name="from_email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-zinc-200 flex items-center gap-2">
+                          <Mail className="h-4 w-4 text-rose-500" />
+                          Email
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="your gmail@example.com"
+                            {...field}
+                            className="bg-zinc-900/50 border-zinc-800 focus:border-rose-500 focus:ring-rose-500/20"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <FormField
+                  control={form.control}
+                  name="from_message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-zinc-200 flex items-center gap-2">
+                        <MessageSquare className="h-4 w-4 text-rose-500" />
+                        Message
+                      </FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Tell me about your project..."
+                          className="min-h-[150px] text-white bg-zinc-900/50 border-zinc-800 focus:border-rose-500 focus:ring-rose-500/20 resize-none"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-to-r from-rose-500 to-pink-500 text-white hover:opacity-90 
+                    transition-all group font-semibold"
+                >
+                  {isSubmitting ? (
+                    <div className="flex items-center justify-center gap-2">
+                      <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                      Sending...
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-center gap-2">
+                      Send Message
+                      <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  )}
+                </Button>
+              </form>
+            </Form>
+          </CardContent>
+        </Card>
+      </div>
     </section>
-  )
+  );
 }
-
