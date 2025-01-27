@@ -22,6 +22,9 @@ html, body {
   overflow-y: hidden; /* Hides vertical scrollbar */
 }
 
+.spline-viewer {
+  touch-action: auto;
+}
 
 @layer base {
   :root {

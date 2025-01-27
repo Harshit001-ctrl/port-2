@@ -12,6 +12,10 @@ body {
   }
 }
 
+.spline-viewer {
+  touch-action: auto;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

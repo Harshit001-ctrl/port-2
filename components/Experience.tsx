@@ -34,7 +34,7 @@ export default function Experience() {
             <div className="space-y-6 md:space-y-8">
               <div className="bg-gradient-to-br from-black/50 to-black/30 p-4 sm:p-6 rounded-xl border border-[#d17777]/20 shadow-lg shadow-[#d17777]/10">
                 <h4 className="text-xl sm:text-xl md:text-2xl text-white font-semibold">Full Stack Developer</h4>
-                <p className="text-[#d17777] text-sm sm:text-lg mt-2">Zillion Softech | 05/2023 – 06/2024</p>
+                <p className="text-[#d17777] text-sm sm:text-lg mt-2">Zillion Softech | 05/2023-Present</p>
                 <ul className="list-disc list-inside text-white mt-4 space-y-2 sm:space-y-3 text-base sm:text-base">
                   <li>Managed various project tasks including team coordination and deadline tracking</li>
                   <li>Developed and maintained user-centric web applications</li>
@@ -42,15 +42,7 @@ export default function Experience() {
                 </ul>
               </div>
 
-              <div className="bg-gradient-to-tr from-black/60 to-[#d17777]/10 p-4 sm:p-6 rounded-xl border border-[#ff98a2]/20 backdrop-blur-sm shadow-lg shadow-black/20">
-                <h4 className="text-xl sm:text-xl md:text-2xl text-white font-semibold">Full Stack Developer</h4>
-                <p className="text-[#d17777] text-sm sm:text-lg mt-2">Mindful Juguns | 19/2025 – Present</p>
-                <ul className="list-disc list-inside text-white mt-4 space-y-2 sm:space-y-3 text-base sm:text-base">
-                  <li>Spearheaded the development of multiple full-stack applications, optimizing functionality across frontend and backend</li>
-                  <li>Collaborated with cross-functional teams to ensure timely project delivery and alignment with business goals.</li>
-                  <li>Utilized project management tools to track progress, manage documentation, and enhance communication across teams.</li>
-                </ul>
-              </div>
+              
             </div>
           </div>
 

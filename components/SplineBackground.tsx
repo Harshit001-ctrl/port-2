@@ -25,7 +25,7 @@ export default function SplineBackground() {
   }
 
   return (
-    <div className="fixed w-screen h-screen bg-black inset-0 z-0">
+    <div className="fixed w-screen h-screen bg-black inset-0 z-0 pointer-events-none">
       <spline-viewer
         className="w-full h-full pointer-events-auto"
         url="https://prod.spline.design/tnncsZa3g99aVmfi/scene.splinecode"
