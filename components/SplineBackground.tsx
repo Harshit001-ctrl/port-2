@@ -1,4 +1,4 @@
-'use client'
+ 'use client'
 
 import '@splinetool/viewer';
 import { useEffect, useState } from 'react';
@@ -35,7 +35,7 @@ export default function SplineBackground() {
         url="https://prod.spline.design/tnncsZa3g99aVmfi/scene.splinecode"
         render-interval="auto"
         device-pixel-ratio="1"
-        shadows="false"
+        // shadows="false"
       />
     </div>
   );

@@ -15,31 +15,35 @@ import "../app/globals.css"
 
 // Import SplineBackground with no SSR
 const SplineBackground = dynamic(() => import('./SplineBackground'), {
-  ssr: false
+  ssr: false,
 });
 
 export function MainLayout() {
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false);
 
+  // Handle when the loading is complete
   useEffect(() => {
     const handleLoadComplete = () => {
-      setIsVisible(true)
-    }
+      setIsVisible(true);
+    };
 
-    window.addEventListener("loadingComplete", handleLoadComplete)
-    return () => window.removeEventListener("loadingComplete", handleLoadComplete)
-  }, [])
+    window.addEventListener('loadingComplete', handleLoadComplete);
+    return () => window.removeEventListener('loadingComplete', handleLoadComplete);
+  }, []);
 
+  // Initialize Lenis for smooth scrolling
   useEffect(() => {
-    const lenis = new Lenis()
+    const lenis = new Lenis();
 
+    // RAF loop for smooth scrolling
     function raf(time: number) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
+      lenis.raf(time);
+      requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf)
-  }, [])
+    requestAnimationFrame(raf);
+  }, []);
+
 
   return (
     <div className={`transition-opacity duration-500 `}>

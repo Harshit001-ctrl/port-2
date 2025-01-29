@@ -17,19 +17,16 @@ body {
   display: none;
 }
 
+body{
+  overflow: hidden;
+}
 
 html, body {
   margin: 0;
   padding: 0;
-  /* box-sizing: border-box; */
-  overflow-x: hidden;  /* Prevents horizontal scrolling */
-  overflow-y: auto;    /* Allows vertical scrolling */
 }
 
 
-.spline-viewer {
-  touch-action: auto;
-}
 
 @layer base {
   :root {
