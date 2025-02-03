@@ -11,15 +11,18 @@ export default function Skills() {
   }, [initializeAnimations])
 
   const skills = [
+    "React",
     "JavaScript",
     "TypeScript",
-    "React",
     "Next.js",
-    "Node.js",
-    "Express",
+    "Material-UI",
+    "Aceternity-UI",
+    "Laravel",
+    "PHP",
     "MongoDB",
-    "SQL",
+    "MY SQL",
     "HTML5",
+    "Generative AI",
     "CSS3",
     "Tailwind CSS",
     "Git",
